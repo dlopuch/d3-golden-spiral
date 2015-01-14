@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Front-end Boilerplate</title>
+    <title>d3-golden-spiral</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
   </head>
@@ -12,22 +12,36 @@
     <script data-main="main" src="/lib/require.js"></script>
 
     <div class="container">
-      <h1>This is index.html!</h1>
+      <style>
+rect {
+  fill: none;
+}
+.square {
+  stroke-opacity: 0.4;
+  stroke: #f6b3b3;
+}
+      </style>
+      <div class="svg-container">
+        <svg>
 
-      <div>Find it at src/public/index.html.</div>
-
-      <div>
-        This file demonstrates how this project starts you with:
-        <ul>
-          <li>Bootstrap CSS</li>
-          <li>Your own LESS CSS compilation</li>
-          <li>JS libs: JQuery, Bootstrap, lodash</li>
-          <li>RequireJS loading</li>
-          <li>Live Reload (go ahead, change this file)</li>
-        </ul>
+        </svg>
       </div>
 
-      <div>To start, run "<tt>grunt build</tt>", then go to <a href="http://localhost:8000">http://localhost:8000</a></div>
+      <div class="controls">
+        Depth:
+        <select class="selectpicker depth">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+      </div>
     </div>
   </body>
 </html>

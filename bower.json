@@ -1,8 +1,8 @@
 {
-  "name": "frontend-js-boilerplate",
+  "name": "d3-golden-spiral",
   "version": "0.0.1",
   "description": "",
-  "homepage": "https://github.com/dlopuch/frontend-js-boilerplate",
+  "homepage": "https://github.com/dlopuch/d3-golden-spiral",
   "authors": [
     "Dan Lopuch <dlopuch@gmail.com>"
   ],
@@ -18,6 +18,7 @@
   "dependencies": {
     "bootstrap": "~3.2.0",
     "lodash": "~2.4.1",
-    "requirejs": "~2.1.15"
+    "requirejs": "~2.1.15",
+    "d3": "~3.5.3"
   }
 }

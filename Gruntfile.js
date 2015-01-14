@@ -6,7 +6,8 @@ module.exports = function(grunt) {
     './bower_components/requirejs/require.js',
     './bower_components/jquery/dist/jquery.js',
     './bower_components/bootstrap/dist/js/bootstrap.js',
-    './bower_components/lodash/dist/lodash.js'
+    './bower_components/lodash/dist/lodash.js',
+    './bower_components/d3/d3.js'
   ];
 
   var DEV_HTTP_PORT = 8000;

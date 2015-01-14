@@ -5,21 +5,23 @@
  */
 require.config({
 
-  baseUrl: "/",
+  baseUrl: "/app/",
 
   paths: {
-    "jquery"    : "/lib/jquery",
-    "bootstrap" : "/lib/bootstrap",
-    "lodash"    : "/lib/lodash",
-    "underscore": "/lib/lodash",
+    "jquery"    : "../lib/jquery",
+    "bootstrap" : "../lib/bootstrap",
+    "lodash"    : "../lib/lodash",
+    "underscore": "../lib/lodash",
+    "d3"        : "../lib/d3"
   },
 
   shim: {
     bootstrap: {
       deps: ['jquery']
-    }
+    },
+    d3: "d3"
   }
 });
 
 
-requirejs(['app/main']);
+requirejs(['index']);

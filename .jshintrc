@@ -21,6 +21,7 @@
     "xit": true,
     "requirejs": true,
     "window": true,
-    "console": true
+    "console": true,
+    "document": true
   }
 }
