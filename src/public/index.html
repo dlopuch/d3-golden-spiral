@@ -16,10 +16,24 @@
 rect {
   fill: none;
 }
-.square {
-  stroke-opacity: 0.4;
-  stroke: #f6b3b3;
+
+.gs-rect {
+  opacity: 0.1;
+  fill: steelblue;
 }
+
+g.last > .gs-rect {
+  /* Style only the last-depth rect in a peculiar way */
+  fill: #52424D;
+  opacity: 0.3;
+}
+
+/*
+.gs-square {
+  stroke-opacity: 0.4;
+  stroke: steelblue;
+}
+*/
       </style>
       <div class="svg-container">
         <svg>
@@ -41,6 +55,19 @@ rect {
           <option value="9">9</option>
           <option value="10">10</option>
         </select>
+      </div>
+
+      <style>
+        .test p {
+          border: 1px solid steelblue;
+          padding: 5px;
+        }
+      </style>
+      <div class="test" style="display:none;">
+        <p>1</p>
+        <p>2</p>
+        <p>3</p>
+        <p>4</p>
       </div>
     </div>
   </body>

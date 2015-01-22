@@ -1,4 +1,4 @@
-define(['d3', 'lodash', 'makeGoldenSpiral'], function(d3, _, makeGoldenSpiral) {
+define(['d3', 'lodash', 'fractalEngine'], function(d3, _, makeGoldenSpiral) {
   var svg = d3.select('svg').attr({width: 400, height: 250}),
       spiralStartEl = svg.append('svg:g')
         .attr({
@@ -12,5 +12,20 @@ define(['d3', 'lodash', 'makeGoldenSpiral'], function(d3, _, makeGoldenSpiral) {
     goldenSpiral.setDepth(depth);
     spiralStartEl.call(goldenSpiral);
   };
-  window.drawGoldenSpiral(1);
+
+  console.log('Starting drawing loop.  Console "clearInterval(drawInterval)" to stop.');
+  var depth = 1,
+      inc = 1;
+  window.drawInterval = setInterval(function() {
+    console.log('drawGoldenSpiral(' + depth + ')');
+    window.drawGoldenSpiral(depth);
+    depth += inc;
+
+    if (depth >= 10) {
+      inc = -1;
+    } else if (depth <= 1) {
+      inc = 1;
+    }
+  }, 300);
+
 });
