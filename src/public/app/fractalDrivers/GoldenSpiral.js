@@ -20,7 +20,7 @@ define(['d3', 'lodash'], function(d3, _) {
     return [
       { tag: 'rect', class: 'gs-square' },
       { tag: 'rect', class: 'gs-rect' },
-      { tag: 'path', class: 'gs-path'}
+      { tag: 'path', class: 'gs-spiral-stroke'}
     ];
   };
 
@@ -32,25 +32,31 @@ define(['d3', 'lodash'], function(d3, _) {
    * @param {Object} d Datum created from the getGlyphsData
    */
   GoldenSpiral.formGlyph = function formGlyph(depth, isLastDepth, d, i) {
-    var parentDatum = d3.select(this.parentNode).datum();
+    var parentDatum = d3.select(this.parentNode).datum(),
+        base = parentDatum.base;
 
     if (i === 0) {
       d3.select(this)
       .classed(d.class, true)
-      .attr({width: parentDatum.base,
-             height: parentDatum.base});
+      .attr({width: base,
+             height: base});
     } else if (i === 1) {
       d3.select(this)
       .classed(d.class, true)
-      .attr({width: parentDatum.width - parentDatum.base,
-             height: parentDatum.base,
-             transform: UTIL.translate(parentDatum.base,0 )
+      .attr({width: parentDatum.width - base,
+             height: base,
+             transform: UTIL.translate(base,0 )
             });
     } else if (i === 2) {
       d3.select(this)
       .classed(d.class, true)
       .attr({
-        d: 'M 0 ' + parentDatum.base + ' Q 0 0 ' + parentDatum.base + ' 0',
+        // Bezier curve -- looks a bit oblong
+        //d: 'M 0 ' + base + ' Q 0 0 ' + base + ' 0',
+
+        // Circle arc: rounder, but doesn't quite flow as cleanly as a bezier
+        d: 'M :base 0 A :base :base 0 0 0 0 :base'.replace(/:base/g, base),
+
         stroke: 'black',
         fill: 'transparent'
       });
