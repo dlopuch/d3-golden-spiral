@@ -19,7 +19,8 @@ define(['d3', 'lodash'], function(d3, _) {
   GoldenSpiral.makeGlyphsData = function makeGlyphsData(depth) {
     return [
       { tag: 'rect', class: 'gs-square' },
-      { tag: 'rect', class: 'gs-rect' }
+      { tag: 'rect', class: 'gs-rect' },
+      { tag: 'path', class: 'gs-path'}
     ];
   };
 
@@ -38,13 +39,21 @@ define(['d3', 'lodash'], function(d3, _) {
       .classed(d.class, true)
       .attr({width: parentDatum.base,
              height: parentDatum.base});
-    } else {
+    } else if (i === 1) {
       d3.select(this)
       .classed(d.class, true)
       .attr({width: parentDatum.width - parentDatum.base,
              height: parentDatum.base,
              transform: UTIL.translate(parentDatum.base,0 )
             });
+    } else if (i === 2) {
+      d3.select(this)
+      .classed(d.class, true)
+      .attr({
+        d: 'M 0 ' + parentDatum.base + ' Q 0 0 ' + parentDatum.base + ' 0',
+        stroke: 'black',
+        fill: 'transparent'
+      });
     }
   };
 
