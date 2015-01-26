@@ -57,7 +57,37 @@ define(['d3', 'lodash'], function(d3, _) {
       secondarySpiral: true
     });
 
-    var goldenSpiralInstance = {};
+    var goldenSpiralInstance = {
+      name: "Golden Spiral"
+    };
+
+    /**
+     * Initializes initial group
+     *
+     * @param {d3.Selection} gEl starting g
+     */
+    goldenSpiralInstance.initialize = function initialize(gEl) {
+      var origSecondarySpiral = opts.secondarySpiral,
+          gElWidth = parseInt( gEl.style('width') === 'auto' ? gEl.attr('width') : gEl.style('width') );
+
+      if (isNaN(gElWidth))
+        throw new Error('goldenSpiral must be initialized against an element with a width!');
+
+      // Re-use makeSubunitsData() to make initial data
+      opts.secondarySpiral = false;
+      var initialDatum = goldenSpiralInstance.makeSubunitsData(0, {base: gElWidth} )[0];
+      opts.secondarySpiral = origSecondarySpiral;
+
+      var height = parseInt( gEl.style('height') === 'auto' ? gEl.attr('height') : gEl.style('height') );
+      if (initialDatum.width / height > PHI) {
+        throw new Error('Starting element must have width/height <= PHI');
+      }
+
+      gEl
+      .datum(initialDatum)
+      .attr('width', initialDatum.width + 'px')
+      .attr('height', initialDatum.base + 'px');
+    };
 
     /**
      * @param {number} depth Current depth
