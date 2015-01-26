@@ -28,4 +28,7 @@ define(['d3', 'lodash', 'fractalEngine'], function(d3, _, makeGoldenSpiral) {
     }
   }, 300);
 
+  window.stop = function() {
+    window.clearInterval(window.drawInterval);
+  };
 });
