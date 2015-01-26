@@ -31,10 +31,6 @@ define(['d3', 'lodash'], function(d3, _) {
   }
 
   FractalEngine.prototype.setDriver = function(newDriver) {
-    if (this.driver && this.driver.name === newDriver.name) {
-      return this; // no change
-    }
-
     this.driver = newDriver;
     // TODO: reset the initial G data so new drivers can reset as they need to.
     this._initDriver();

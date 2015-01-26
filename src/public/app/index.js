@@ -8,16 +8,18 @@ define(['d3', 'lodash', 'FractalEngine', 'fractalDrivers/goldenSpiralFactory'],
             height: (parseInt(svg.style('height')) - 4) + 'px'
           });
 
-    var goldenSpiral = new FractalEngine({
+    var fractalEngine = new FractalEngine({
       depth: 1,
       startG: spiralStartEl,
       driver: goldenSpiralFactory({
         glyphs: {
-          // square: true,
-          // rectangle: {
-            // //noLastHighlight: true,
-            // lastOnly: true
-          // },
+          square: {
+            lastOnly: true
+          },
+          rectangle: {
+            //noLastHighlight: true,
+            lastOnly: true
+          },
 
           // spiral: false,
           spiral: {
@@ -28,20 +30,20 @@ define(['d3', 'lodash', 'FractalEngine', 'fractalDrivers/goldenSpiralFactory'],
             }
           }
         },
-        //secondarySpiral: false
+        secondarySpiral: false
       })
     });
 
-    window.drawGoldenSpiral = function(depth) {
-      goldenSpiral.setDepth(depth).draw();
+    window.draw = function(depth) {
+      fractalEngine.setDepth(depth).draw();
     };
 
     console.log('Starting drawing loop.  Console "stop()" to stop.');
     var depth = 1,
         inc = 1;
     window.drawInterval = setInterval(function() {
-      console.log('drawGoldenSpiral(' + depth + ')');
-      window.drawGoldenSpiral(depth);
+      console.log('draw(' + depth + '); \t stop() to stop.');
+      window.draw(depth);
       depth += inc;
 
       if (depth >= 10) {
@@ -52,8 +54,13 @@ define(['d3', 'lodash', 'FractalEngine', 'fractalDrivers/goldenSpiralFactory'],
     }, 300);
 
     window.stop = function() {
+      console.log('Stopping.');
+      console.log('draw at your own depth: fractalEngine.setDepth(' + depth + ').draw();');
       window.clearInterval(window.drawInterval);
     };
+
+    window.fractalEngine = fractalEngine;
+    window.goldenSpiralFactory = goldenSpiralFactory;
 
   }
 );

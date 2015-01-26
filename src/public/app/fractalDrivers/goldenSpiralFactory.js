@@ -15,8 +15,11 @@ define(['d3', 'lodash'], function(d3, _) {
    *
    * @param {Object} opts:
    *   glyphs: {
-   *     square: {boolean} (Defaults false) True to render GoldenSpiral squares
+   *     square: {boolean} (Defaults false) True to render GoldenSpiral squares, with options: {
+   *       lastOnly: {boolean} (Defaults false) True to draw only the last square
+   *     }
    *     rectangle: {false | Object} (Defaults false) Truthy to render rectangle, with options: {
+   *       lastOnly: {boolean} (Defaults false) True to draw only the last rectangle
    *       noLastHighlight: {boolean} (Defaults false) True to turn off special styling/highlighting for the last-layer
    *         rectangle
    *     }
@@ -58,7 +61,8 @@ define(['d3', 'lodash'], function(d3, _) {
     });
 
     var goldenSpiralInstance = {
-      name: "Golden Spiral"
+      name: "Golden Spiral",
+      opts: opts
     };
 
     /**
@@ -91,13 +95,16 @@ define(['d3', 'lodash'], function(d3, _) {
 
     /**
      * @param {number} depth Current depth
+     * @param {boolean} isLastDepth True if these are glyphs at the final level
      * @returns {Array(Object)} data bound to the glyphs
      */
     goldenSpiralInstance.makeGlyphsData = function makeGlyphsData(depth, isLastDepth) {
       var glyphs = [];
 
-      if (opts.glyphs.square)
+      if (opts.glyphs.square &&
+          ( !opts.glyphs.square.lastOnly || isLastDepth )) {
         glyphs.push({ tag: 'rect', class: 'gs-square' });
+      }
 
       if (opts.glyphs.rectangle &&
           ( !opts.glyphs.rectangle.lastOnly || isLastDepth )) {
@@ -132,9 +139,7 @@ define(['d3', 'lodash'], function(d3, _) {
                   height: base,
                   transform: UTIL.translate(base,0 )
                 });
-        if (isLastDepth && !opts.glyphs.rectangle.noLastHighlight) {
-          el.classed('gs-rect-last', true);
-        }
+        el.classed('gs-rect-last', isLastDepth && !opts.glyphs.rectangle.noLastHighlight);
 
       } else if (d.class === 'gs-spiral') {
         el.attr(_.extend({
